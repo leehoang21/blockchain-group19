@@ -13,13 +13,11 @@ function App() {
   useEffect(() => {
     const init = async () => {
       const { signerAddress, todo } = await getBlockchain();
-      setTasks(new Tasks(todo, []));
+      const todos = await (new Tasks(todo, [])).getTasks();
+      setTasks(new Tasks(todo, todos));
     };
 
-    init().then(() => {
-      //tasks.getTasks();
-    }
-    );
+    init();
 
   }, []);
 
@@ -44,14 +42,16 @@ function App() {
   };
 
   const toggleDone = (id) => {
-    tasks.toggleDone(id);
-    //lấy tag table-date-complete tương ứng
-    let dateComplete = document.getElementsByClassName("table-date-complete" + id);
-    //thay đổi giá trị của tag table-date-complete tương ứng
-    dateComplete[0].innerHTML = formatDate(new Date().getTime());
-    //thay đổi button done thành text
-    let btnDone = document.getElementById('btn-done');
-    btnDone.outerHTML = "done";
+    tasks.toggleDone(id).then(() => {
+      //lấy tag table-date-complete tương ứng
+      let dateComplete = document.getElementsByClassName("table-date-complete" + id);
+      //thay đổi giá trị của tag table-date-complete tương ứng
+      dateComplete[0].innerHTML = formatDate(new Date().getTime());
+      //thay đổi button done thành text
+      let btnDone = document.getElementById('btn-done');
+      btnDone.outerHTML = "done";
+    });
+
   }
 
   return (
@@ -113,7 +113,11 @@ function App() {
                     <td className="table-date">{formatDate(todo.date)}</td>
                     <td className="table-content">{todo.job}</td>
                     <td className="table-author">{todo.author}</td>
-                    <td><button onClick={() => toggleDone(todo.id)} type="submit" id='btn-done' name='btn-done'>done </button></td>
+                    {todo.done ?
+                      <td>done</td> :
+                      <td><button onClick={() => toggleDone(todo.id)} type="submit" id='btn-done' name='btn-done'>done </button></td>
+                    }
+
                     <td className={"table-date-complete" + todo.id}>{formatDate(todo.dateComplete)}</td>
 
                   </tr>

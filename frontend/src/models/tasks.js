@@ -4,7 +4,14 @@ export default class Tasks {
 
     constructor(todo, todos) {
         this.todo = todo;
-        this.todos = todos;
+        this.todos = this.convertTasks(todos);
+        console.log(this.todos);
+    }
+
+    convertTasks(tasks) {
+        return tasks.map((task) => {
+            return new Task(parseInt(task[0]), task[2], task[3], parseInt(task[1]), task[4], parseInt(task[5]));
+        });
     }
 
     createTask(job, author) {
@@ -17,25 +24,25 @@ export default class Tasks {
     }
 
     getTasks() {
-        return this.todos;
-        // return new Promise((resolve, reject) => {
-        //     todo.getTaskIds()
-        //         .then((taskIds) => {
-        //             console.log(taskIds);
-        //             const promises = [];
-        //             taskIds.forEach((taskId) => {
-        //                 promises.push(todo.getTask(taskId));
-        //             });
-        //             return Promise.all(promises);
-        //         })
-        //         .then((tasks) => {
-        //             resolve(tasks);
-        //             this.todos = tasks;
-        //         })
-        //         .catch((error) => {
-        //             reject(error);
-        //         });
-        // });
+        //return this.todos;
+        return new Promise((resolve, reject) => {
+            this.todo.getTaskIds()
+                .then((taskIds) => {
+                    console.log(taskIds);
+                    const promises = [];
+                    taskIds.forEach((taskId) => {
+                        promises.push(this.todo.getTask(taskId));
+                    });
+                    return Promise.all(promises);
+                })
+                .then((tasks) => {
+                    resolve(tasks);
+                    this.todos = this.convertTasks(tasks);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
     };
 
     getTask(id) {
@@ -46,7 +53,7 @@ export default class Tasks {
     toggleDone(id) {
         let task = this.getTask(id);
         task.done = !task.done;
-        task.dateCompele = task.done ? new Date().getTime() : 0;
+        task.dateComplete = task.done ? new Date().getTime() : 0;
         return this.todo.toggleDone(id, { gasLimit: 300000 });
 
     }
