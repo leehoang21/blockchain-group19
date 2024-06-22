@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  height: 80px;
+  background-color: rgb(100, 183, 213);
+  line-height: 80px;
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+}
+
+.wraper {
+  width: 86%;
+  margin: auto;
+}
+
+.container-create-task {
+  margin-top: 20px;
+  height: 320px;
+  border: 1px solid #ccc;
+  padding: 16px 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 500;
+  color: orange;
+}
+
+.container-form {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.container-form__lable {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.container-form__input {
+  margin-top: 10px;
+  width: 100%;
+  outline: none;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 17px;
+  padding: 0 8px;
+  color: #333;
+}
+
+.container-form__input::placeholder {
+  font-size: 15px;
+  color: #c8c6c6;
+}
+
+.container-form__submit-btn {
+  background-color: orange;
+  border: none;
+  color: #fff;
+  height: 34px;
+  min-width: 80px;
+  margin-top: 20px;
+  border-radius: 3px;
+}
+
+/* style button done */
+.btn-done {
+  background-color: green;
+  border: none;
+  color: #fff;
+  margin-top: 10px;
+  border-radius: 3px;
+  height: 20px;
+  min-width: 40px;
+  cursor: pointer;
+}
+
+.container-form__submit-btn:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.container-task {
+  margin-top: 20px;
+  min-height: 120px;
+  border: 1px solid #ccc;
+  padding: 16px 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-tasks {
+  border-spacing: unset;
+  width: 90%;
+  border-collapse: collapse;
+}
+
+.table-head {
+  border-bottom: 1px solid #ccc;
+}
+
+.table-title {
+  font-weight: 700;
+  color: #333;
+  text-align: left;
+}
+
+.table-id {
+  width: 5%;
+}
+
+.table-date,
+.table-date-complete {
+  width: 10%;
+}
+
+.table-author,
+.table-content {
+  width: 20%;
+}
+
+.table-done {
+  width: 5%;
+}
+
+.container-task th,
+.container-task td {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+.footer {
+  margin-top: 20px;
+  height: 80px;
+  text-align: center;
+  background-color: orange;
+  color: #fff;
+  line-height: 80px;
+  font-size: 20px;
+}
